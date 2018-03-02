@@ -1,0 +1,52 @@
+<h1 align='center'>Orders</h1>
+<p id="notice"><%= notice %></p>
+<table class="table" >
+  <tbody>
+    <tr>
+      <th>INV20181010101210</th>
+    </tr>
+    <tr>
+      <td rowspan="2">
+        <b>Item</b>
+      </td>
+      <td>
+          <table>
+            <% @order.line_items.each do |item| %>
+              <tr>
+                <td><%= item.product.title %></td>
+                <td><%= item.quantity %>&times;</td>
+                <td><%= number_to_currency(item.product.price) %></td>
+                <td class="item_price"><%= number_to_currency(item.total_price) %></td>
+                <% unless @is_paid %>
+                  <td><%= link_to 'Destroy', line_item_path(item.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <% end %>
+              </tr>
+            <% end %>
+
+            <tr class="total_line">
+              <td colspan="2"></td>
+              <th >Total</th>
+              <th ><%= number_to_currency(@order.total_price) %></th>
+            </tr>
+          </table>
+      </td>
+
+    </tr>
+    <tr>
+      <td>
+        <p>
+          <strong>Name:</strong>
+          <%= @order.name %>
+        </p>
+
+        <p>
+          <strong>Address:</strong>
+          <%= @order.address %>
+        </p>
+
+
+        <%= link_to 'Edit', edit_order_path(@order) %>
+      </td>
+    </tr>
+  </tbody>
+</table>

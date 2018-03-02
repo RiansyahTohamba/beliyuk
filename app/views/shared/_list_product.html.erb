@@ -1,0 +1,53 @@
+
+	<div class="new_arrivals">
+
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<div class="section_title new_arrivals_title">
+						<h2><%= @header_page %> </h2>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<%= paginate @products %>
+			</div>
+			<div class="row">
+
+				<div class="col">
+				<!-- isotop yang memperbaiki posisinya -->
+					<div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+						<% @products.each do |product| %>
+							<div class="product-item" style="">
+
+									<div class="product_image">
+										<%= display_product product.image_url%>
+									</div>
+										<% if can? :destroy, product%>
+											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+												<span class="delete_bubble"> <%= link_to 'delete', product, method: :delete,
+															data: { confirm: 'Are you sure?' } %>
+												</span>
+											</div>
+										<% end %>
+									<div class="product_info">
+										<h6 class="product_name">
+											<%= link_to product.title, product %> <br>
+											<%= link_to product.merchant.name, product.merchant %>
+										</h6>
+										<div class="product_price"><%= number_to_currency(product.price) %></div>
+									</div>
+								<div align='center' class="add_to_cart_button">
+									<%= add_to_cart_btn(product.id) %>
+
+								</div>
+							</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+    <%= javascript_include_tag 'isotope.pkgd.min'%>

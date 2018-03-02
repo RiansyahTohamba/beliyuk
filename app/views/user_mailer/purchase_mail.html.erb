@@ -1,0 +1,23 @@
+<h1>Pembayaran anda sukses</h1>
+
+<div class="">
+  <p>
+    Hi <%= @order.name %>, silahkan tunggu pengiriman barang, berikut detail pembelian anda :
+  </p>
+  <table>
+    <% @order.line_items.each do |item| %>
+      <tr>
+        <td><%= item.product.title %></td>
+        <td><%= item.quantity %>&times;</td>
+        <td><%= number_to_currency(item.product.price) %></td>
+        <td class="item_price"><%= number_to_currency(item.total_price) %></td>
+      </tr>
+    <% end %>
+
+    <tr class="total_line">
+      <td colspan="2"></td>
+      <th >Total</th>
+      <th ><%= number_to_currency(@order.total_price) %></th>
+    </tr>
+  </table>
+</div>

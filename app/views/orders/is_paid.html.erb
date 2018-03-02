@@ -1,0 +1,27 @@
+<br>
+<div class="new_arrivals">
+  <div class="container alert-success">
+
+    <p>Thank you, your order has been placed
+    We've sent you an e-mail confirmation</p>
+    <p> Your orders will be delivered to <b><%= @order.address %></b>
+
+       Estimated delivery : <b>10-03-2018</b>
+    Review your order
+    </p>
+
+  </div>
+  <div class="container">
+    <%= button_to "continue shopping", root_path, :method => "get" %>
+  </div>
+  <div class="container">
+    <%= render "detail_order" %>
+
+
+
+
+
+
+
+  </div>
+</div>

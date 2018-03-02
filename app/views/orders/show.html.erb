@@ -1,0 +1,46 @@
+<br>
+<div class="new_arrivals">
+  <div class="container">
+    <%= render "detail_order" %>
+
+    <div align='center'>
+      <%= form_tag charges_path, id:'chargeForm' do %>
+      <% if flash[:error].present? %>
+        <div id="error_explanation">
+          <p><%= flash[:error] %></p>
+        </div>
+      <% end %>
+
+      <!-- use credit card number 4242 4242 4242 4242 , any three digit CVC and any expiry date-->
+      <script src="https://checkout.stripe.com/checkout.js"></script>
+      <%= hidden_field_tag 'emailUser', current_user.email %>
+      <%= hidden_field_tag 'stripeToken' %>
+      <%= hidden_field_tag 'stripeEmail' %>
+      <%= hidden_field_tag 'amount', (@order.total_price * 100).to_i %>
+      <%= hidden_field_tag 'orderId', @order.id %>
+      <button id="btn-buy" type="button" class="btn btn-primary">
+        Pay With Card
+      </button>
+      <script type="text/javascript">
+        var handler = StripeCheckout.configure({
+          key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+          token: function (token, arg) {
+            document.getElementById("stripeToken").value = token.id;
+            document.getElementById("stripeEmail").value = token.email;
+            document.getElementById("chargeForm").submit();
+          }
+        });
+        // membuka popup dialog, ketiga paramater name,description, amount harus diisi
+        document.getElementById("btn-buy").addEventListener('click', function (e) {
+          handler.open({name: 'Beliyuk', description: 'Buy these thing',email: document.getElementById("emailUser").value, amount: document.getElementById("amount").value});
+          // amount in cent
+          e.preventDefault();
+        });
+      </script>
+      <% end %>
+    </div>
+
+
+
+</div>
+</div>
