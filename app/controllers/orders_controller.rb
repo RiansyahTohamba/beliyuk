@@ -17,8 +17,8 @@ class OrdersController < ApplicationController
       @is_paid = (@order.status == 1)
       # @order
       if @is_paid
-        # email_to = 'riansyah@41studio.com' #TODO: di order nanti tambahkan email pengirim
-        # UserMailer.purchase_mail(@order,email_to).deliver_later
+        email_to = 'riansyah@41studio.com' #TODO: di order nanti tambahkan email pengirim
+        UserMailer.purchase_mail(@order,email_to).deliver_later
         format.html { render :is_paid }
       elsif
         format.html { render :show }
