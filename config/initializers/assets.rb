@@ -17,6 +17,6 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 #   # Rails.application.config.assets.precompile += ["#{controller}.js", "#{controller}.css"]
 #   Rails.application.config.assets.precompile += ["#{controller}.css"]
 # end
-Rails.application.config.assets.precompile += %w( active_admin.js active_admin.css cart.css carts.css 
+Rails.application.config.assets.precompile += %w( active_admin.js active_admin.css cart.css carts.css
         charges.css customer.css home.css isotope.pkgd.min.js
-        line_items.css merchants.css orders.css products.css registration.css )
+        line_items.css merchants.css orders.css products.css pdf.css registration.css )
