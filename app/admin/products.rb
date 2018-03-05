@@ -7,16 +7,31 @@ ActiveAdmin.register Product,namespace: :customers do
   index do
     id_column
     column "Image" do |product|
-      # TODO: image_tag untuk multiple image gimana ?
-      # image_tag(product.product_images.first(:thumb))
+      image_tag(product.product_images.first.image_url.url(:thumb))
     end
     column :title
     column :price , :sortable => :price do |cur|
-            number_to_currency cur.price
+        number_to_currency cur.price
     end
     actions
   end
-
+  show do
+    attributes_table do
+      row :title
+      row :price do |cur|
+        number_to_currency cur.price
+      end
+      row :created_at
+      row :updated_at
+    end
+    panel "Images" do
+      table_for product.product_images do
+        column :image do |image|
+          image_tag(image.image_url)
+        end
+      end
+    end
+  end
   form(html: { multipart:  true }) do |f|
     f.inputs "Product" do
       f.input :title

@@ -19,4 +19,4 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # end
 Rails.application.config.assets.precompile += %w( active_admin.js active_admin.css cart.css carts.css
         charges.css customer.css home.css isotope.pkgd.min.js
-        line_items.css merchants.css orders.css products.css pdf.css registration.css )
+        line_items.css merchants.css orders.css products.css pdf.css registration.css single_custom.js jquery-3.2.1.min.js)

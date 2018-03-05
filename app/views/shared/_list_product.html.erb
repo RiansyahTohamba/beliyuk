@@ -22,7 +22,7 @@
 							<div class="product-item" style="">
 
 									<div class="product_image">
-										<%= display_product product.image_url%>
+										<%= display_product product.product_images.first.image_url%>
 									</div>
 										<% if can? :destroy, product%>
 											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">

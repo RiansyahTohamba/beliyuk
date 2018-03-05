@@ -6,27 +6,31 @@
           <div class="col-lg-3 thumbnails_col order-lg-1 order-2">
             <div class="single_product_thumbnails">
               <ul>
-                <li class="active"><img src="<%= image_path(@product.image_url.thumb.url)%>" alt=""></li>
-                <li >
-                  <img src="images/single_2_thumb.jpg" alt="" >
-                </li>
-                <li><img src="images/single_3_thumb.jpg" alt="" ></li>
+                <!-- image_tag(product.product_images.first.image_url.url(:thumb)) -->
+                <% @product.product_images.each do |image| %>
+                    <li><img src="<%= image_path(image.image_url.url(:thumb)) %>" alt="" data-image="<%= image_path(image.image_url.url) %>"> </li>
+                <% end %>
               </ul>
             </div>
           </div>
           <div class="col-lg-9 image_col order-lg-2 order-1">
             <div class="single_product_image">
               <div class="single_product_image_background"
-                style="background-image:url(<%= image_path(@product.image_url) %>)"></div>
+                style="background-image:url(<%= image_path(@product.product_images.first.image_url) %>)"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <%= javascript_include_tag 'single_custom'%>
+
+
     <div class="col-lg-5">
       <div class="product_details">
         <div class="">
           <h2><%= @product.title %></h2>
+          <%= link_to @product.merchant.name, @product.merchant %>
           <p><%= @product.description %></p>
         </div>
         <div class="free_delivery d-flex flex-row align-items-center justify-content-center">
