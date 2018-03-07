@@ -1,6 +1,7 @@
+require 'helper/product_helper'
+include ProductHelper
 ActiveAdmin.register Product,namespace: :customers do
-  permit_params :title, :price, :description ,:merchant_id,
-      product_images_attributes: [:id, :image_url, :product_id]
+  permit_params params_product
 
   scope_to :current_user
 
@@ -15,39 +16,16 @@ ActiveAdmin.register Product,namespace: :customers do
     end
     actions
   end
-  show do
-    attributes_table do
-      row :title
-      row :price do |cur|
-        number_to_currency cur.price
-      end
-      row :created_at
-      row :updated_at
-    end
-    panel "Images" do
-      table_for product.product_images do
-        column :image do |image|
-          image_tag(image.image_url)
-        end
-      end
-    end
-  end
-  form(html: { multipart:  true }) do |f|
-    f.inputs "Product" do
-      f.input :title
-      f.input :price
-      f.has_many :product_images do |p|
-          p.input :image_url, as: :file
-      end
-      f.input :description
-      f.input :merchant_id, :input_html => {value: Merchant.new.get_id(current_user.id)} , as: :hidden
-    end
-    f.actions
-  end
+
+  show({},&show_product)
+
+  form(html: { multipart:  true },&form_product)
 end
 
 ActiveAdmin.register Product,namespace: :admin do
-  permit_params :title, :price, :description, :image_url, :merchant_id
+  permit_params params_product
+  show({},&show_product)
+
   form(:html => { :multipart => true }) do |f|
     f.inputs "Product" do
       f.input :title

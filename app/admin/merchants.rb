@@ -7,14 +7,14 @@ ActiveAdmin.register Merchant,namespace: :customers do
     def scoped_collection
       User.new.as_merchant(current_user.id)
     end
-    def update
-      merchant_params = params.require(:merchant).permit(:name,:image_url, :address, :description)
-      if Merchant.update(merchant_params)
-        redirect_to customers_merchants_path, notice: "successfully!"
-      else
-        render active_admin_template('edit.html.erb')
-      end
-    end
+    # def update
+    #   merchant_params = params.require(:merchant).permit(:name,:image_url, :address, :description)
+    #   if Merchant.update(merchant_params)
+    #     redirect_to customers_merchants_path, notice: "successfully!"
+    #   else
+    #     render active_admin_template('edit.html.erb')
+    #   end
+    # end
   end
 
   index do
