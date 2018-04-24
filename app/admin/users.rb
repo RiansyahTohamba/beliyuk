@@ -5,7 +5,6 @@ ActiveAdmin.register User,namespace: :admin do
     id_column
     column :email
     column :name
-
     column :merchant
     actions
   end
@@ -22,13 +21,4 @@ ActiveAdmin.register User,namespace: :admin do
     f.actions
   end
 
-  # controller do
-  #   def create
-  #     @user = User.new
-  #     @user.email = params[:email]
-  #     @user.merchant_id = params[:merchant_id]
-  #     @user.name = params[:name]
-  #     @user.save!
-  #   end
-  # end
 end
